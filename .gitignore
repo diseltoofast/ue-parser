@@ -1,0 +1,53 @@
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+
+# Node artifact files
+node_modules/
+dist/
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# Log files
+*.log
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+composer.lock
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+
+# local phpunit config
+/phpunit.xml
+
+# Applications
+*.app
+*.exe
+*.war
+
+# Large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+# other
+/var
+*.cache
