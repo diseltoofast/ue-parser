@@ -6,6 +6,7 @@
     "config": {
         "sort-packages": true
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Diseltoofast\\UeParser\\": [
