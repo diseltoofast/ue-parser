@@ -48,12 +48,12 @@ $parser = new \Diseltoofast\UeParser\LocresWriter($filePath);
 // Initialize LocresString instances and add strings in bulk
 $writer->setStrings([
     new \Diseltoofast\UeParser\Entities\LocresString(
-        "ST_AltarStaticTexts", 
-        3755353534, 
-        "LOC_AD_Character_BodyText_LevelingHint", 
-        2370108482, 
+        "ST_AltarStaticTexts", // Namespace
+        3755353534, // Namespace hash (CityHash64)
+        "LOC_AD_Character_BodyText_LevelingHint", // Key
+        2370108482, // Key hash (CityHash64)
         "You must use a bed to sleep and meditate on what you've learned in order to increase your level.", 
-        2704250568
+        2704250568 // Value hash (CRC)
     ),
     new \Diseltoofast\UeParser\Entities\LocresString(
         "LOC_AD_Help_Title_Tutorials", 
@@ -125,7 +125,7 @@ $parser->saveJSON();
 ```
 
 ## Methods to hash strings 
-Available algorithms: CityHash64, CRC32.
+Available algorithms: CityHash64, CRC.
 
 ```php
 echo \Diseltoofast\UeParser\Hash\Crc::hash('Hello world!');
