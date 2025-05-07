@@ -48,12 +48,12 @@ $parser = new \Diseltoofast\UeParser\LocresWriter($filePath);
 // Initialize LocresString instances and add strings in bulk
 $writer->setStrings([
     new \Diseltoofast\UeParser\Entities\LocresString(
-        "ST_AltarStaticTexts", // Namespace
-        3755353534, // Namespace hash (CityHash64)
-        "LOC_AD_Character_BodyText_LevelingHint", // Key
-        2370108482, // Key hash (CityHash64)
-        "You must use a bed to sleep and meditate on what you've learned in order to increase your level.", 
-        2704250568 // Value hash (CRC)
+        "ST_AltarStaticTexts",                       // Namespace
+        3755353534,                                  // Namespace hash (CityHash64)
+        "LOC_AD_Character_BodyText_LevelingHint",    // Key
+        2370108482,                                  // Key hash (CityHash64)
+        "You must use a bed to sleep and meditate.", // Value
+        2704250568                                   // Value hash (CRC)
     ),
     new \Diseltoofast\UeParser\Entities\LocresString(
         "LOC_AD_Help_Title_Tutorials", 
@@ -91,12 +91,12 @@ $writer->setString(new \Diseltoofast\UeParser\Entities\LocresString(
 ));
 // If you don't know the hash values for the namespace, key, or value of the strings, you can specify 0 for these fields. The library will automatically generate the required hashes.
 $writer->setString(new \Diseltoofast\UeParser\Entities\LocresString(
-    "LOC_AD_Help_Title_Tutorials", // Namespace
-    0,                             // Namespace hash (set to 0 for auto-generation)
-    "LOC_AD_Help_Title_Tutorials", // Key
-    0,                             // Key hash (set to 0 for auto-generation)
-    "Tutorials",                   // Value
-    0                              // Value hash (set to 0 for auto-generation)
+    "LOC_AD_Help_Title_Tutorials",
+    0,                             // set to 0 for auto-generation
+    "LOC_AD_Help_Title_Tutorials",
+    0,                             // set to 0 for auto-generation
+    "Tutorials",
+    0                              // set to 0 for auto-generation
 ));
 // Save to a .locres file
 $writer->save();

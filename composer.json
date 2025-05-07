@@ -3,11 +3,11 @@
     "description": "PHP library for parsing Unreal Engine files",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Diseltoofast\\UeParser\\": [
