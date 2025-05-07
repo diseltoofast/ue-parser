@@ -53,7 +53,7 @@ $writer->setStrings([
         "LOC_AD_Character_BodyText_LevelingHint",    // Key
         2370108482,                                  // Key hash (CityHash64)
         "You must use a bed to sleep and meditate.", // Value
-        2704250568                                   // Value hash (CRC)
+        2087340891                                   // Value hash (CRC)
     ),
     new \Diseltoofast\UeParser\Entities\LocresString(
         "LOC_AD_Help_Title_Tutorials", 
@@ -78,8 +78,8 @@ $writer->setString(new \Diseltoofast\UeParser\Entities\LocresString(
     3755353534, 
     "LOC_AD_Character_BodyText_LevelingHint", 
     2370108482, 
-    "You must use a bed to sleep and meditate on what you've learned in order to increase your level.", 
-    2704250568
+    "You must use a bed to sleep and meditate.", 
+    2087340891
 ));
 $writer->setString(new \Diseltoofast\UeParser\Entities\LocresString(
     "LOC_AD_Help_Title_Tutorials", 
