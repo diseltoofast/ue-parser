@@ -204,6 +204,11 @@ class CityHash64
         $x = self::add(self::rotate(self::add($e, $f), 42), $c);
         $y = self::mul(self::add(self::byteSwap(self::mul(self::add($v, $w), $mul)), $g), $mul);
         $z = self::add(self::add($e, $f), $c);
+
+        // y = (bswap_64((v + w) * mul) + g) * mul
+        echo self::byteSwap(self::mul(self::add($v, $w), $mul)) . PHP_EOL;
+
+
         $a = self::add(self::byteSwap(self::add(self::mul(self::add($x, $z), $mul), $y)), $b);
         $b = self::mul(self::shiftMix(self::add(self::add(self::mul(self::add($z, $a), $mul), $d), $h)), $mul);
 
@@ -319,9 +324,29 @@ class CityHash64
     private static function byteSwap(string $value): string
     {
         $value = self::mask($value, self::MASK_64);
-        $value = gmp_export($value);
-        $value = strrev($value);
-        $result = gmp_import($value);
+
+        $result = gmp_or(
+            self::shiftLeft(gmp_and($value, '0xFF'), 56),          // Байт 0 → Байт 7
+            gmp_or(
+                self::shiftLeft(gmp_and($value, '0xFF00'), 40),    // Байт 1 → Байт 6
+                gmp_or(
+                    self::shiftLeft(gmp_and($value, '0xFF0000'), 24), // Байт 2 → Байт 5
+                    gmp_or(
+                        self::shiftLeft(gmp_and($value, '0xFF000000'), 8), // Байт 3 → Байт 4
+                        gmp_or(
+                            self::shiftRight(gmp_and($value, '0xFF00000000'), 8), // Байт 4 → Байт 3
+                            gmp_or(
+                                self::shiftRight(gmp_and($value, '0xFF0000000000'), 24), // Байт 5 → Байт 2
+                                gmp_or(
+                                    self::shiftRight(gmp_and($value, '0xFF000000000000'), 40), // Байт 6 → Байт 1
+                                    gmp_and(self::shiftRight($value, 56), '0xFF')             // Байт 7 → Байт 0
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
 
         return gmp_strval($result);
     }
