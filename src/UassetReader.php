@@ -92,10 +92,18 @@ class UassetReader
         for ($i = 0; $i < $stringsCount; $i++) {
             $keyLength = $reader->readInt32(); // Key length
             $keyTitle = $this->readTrimmedString($keyLength); // Key itself
-            $strLength = $reader->readUInt32(); // String length
-            $strTitle = $this->readTrimmedString($strLength); // String itself
+            $strLength = $reader->readInt32(); // String length
 
-            $this->data->strings[$this->data->namespace][$keyTitle] = $strTitle;
+            // If UTF-16
+            if ($strLength < 0) {
+                $text = $reader->readStringUTF16($strLength * -2, 'UTF-8'); // Read string in UTF-16
+            } else {
+                $text = $reader->readString($strLength); // Read string in ASCII
+            }
+
+            $text = rtrim($text, "\0"); // Remove the trailing null byte
+
+            $this->data->strings[$this->data->namespace][$keyTitle] = $text;
         }
 
         $commentsCount = $reader->readUInt32(); // Number of comments
