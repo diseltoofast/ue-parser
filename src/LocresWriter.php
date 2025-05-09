@@ -120,24 +120,28 @@ class LocresWriter
         $stringsBuffer = []; // Buffer to exclude duplicates
 
         // Write data by namespaces
+        $n = 0;
         foreach ($this->strings as $strings) {
+            $namespaceNext = 0;
             /** @var LocresString $string */
-            foreach ($strings as $i => $string) {
+            foreach ($strings as $string) {
                 // Exclude duplicate strings
                 $genHash = crc32($string->value);
                 if (isset($stringsBuffer[$genHash])) {
                     $stringsBuffer[$genHash]['count'] += 1; // Increment duplicate count
                 } else {
-                    $stringsBuffer[$genHash] = ['index' => $i, 'value' => $string->value, 'count' => 1];
+                    $stringsBuffer[$genHash] = ['index' => $n, 'value' => $string->value, 'count' => 1];
+                    $n++;
                 }
 
                 // Write the namespace (only for the first string in the namespace)
-                if ($i === 0) {
+                if ($namespaceNext === 0) {
                     $string->namespace .= "\0"; // Add null terminator
                     $writer->writeUInt32($string->namespaceHash); // Namespace hash
                     $writer->writeUInt32(mb_strlen($string->namespace, 'UTF-8')); // Namespace length
                     $writer->writeString($string->namespace); // Namespace itself
                     $writer->writeUInt32(count($strings)); // Number of strings in the namespace
+                    $namespaceNext = 1;
                 }
 
                 // Write string information
