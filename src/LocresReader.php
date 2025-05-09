@@ -243,13 +243,30 @@ class LocresReader
     }
 
     /**
-     * Replaces line breaks in a string with special markers.
+     * Replaces line breaks in a string with special markers or restores them back to their original form.
      *
-     * @param string $string The input string.
-     * @return string The modified string with line breaks replaced by markers (<crlf>, <cr>, <lf>).
+     * This method is useful for handling strings that may contain line breaks (`\r\n`, `\r`, `\n`)
+     * by replacing them with human-readable markers (`<crlf>`, `<cr>`, `<lf>`). It can also reverse
+     * the process by restoring the original line breaks from the markers.
+     *
+     * @param string $string The input string to process.
+     * @param bool $back If set to `true`, restores the original line breaks from the markers.
+     *                   If `false` (default), replaces line breaks with markers.
+     * @return string The processed string with line breaks replaced by markers or restored to their original form.
+     *
+     * @example
+     * // Replace line breaks with markers
+     * echo replaceBreaklines("Hello\r\nWorld");
+     * // Output: "Hello<crlf>World"
+     *
+     * // Restore line breaks from markers
+     * echo replaceBreaklines("Hello<crlf>World", true);
+     * // Output: "Hello\r\nWorld"
      */
-    public static function replaceBreaklines(string $string): string
+    public static function replaceBreaklines(string $string, bool $back = false): string
     {
-        return str_replace(["\r\n", "\r", "\n"], ['<crlf>', '<cr>', '<lf>'], $string);
+        return $back
+            ? str_replace(['<crlf>', '<cr>', '<lf>'], ["\r\n", "\r", "\n"], $string)
+            : str_replace(["\r\n", "\r", "\n"], ['<crlf>', '<cr>', '<lf>'], $string);
     }
 }
