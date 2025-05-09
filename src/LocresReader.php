@@ -248,7 +248,7 @@ class LocresReader
      * @param string $string The input string.
      * @return string The modified string with line breaks replaced by markers (<crlf>, <cr>, <lf>).
      */
-    private static function replaceBreaklines(string $string): string
+    public static function replaceBreaklines(string $string): string
     {
         return str_replace(["\r\n", "\r", "\n"], ['<crlf>', '<cr>', '<lf>'], $string);
     }
