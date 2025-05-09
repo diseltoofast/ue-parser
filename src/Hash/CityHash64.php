@@ -204,11 +204,6 @@ class CityHash64
         $x = self::add(self::rotate(self::add($e, $f), 42), $c);
         $y = self::mul(self::add(self::byteSwap(self::mul(self::add($v, $w), $mul)), $g), $mul);
         $z = self::add(self::add($e, $f), $c);
-
-        // y = (bswap_64((v + w) * mul) + g) * mul
-        echo self::byteSwap(self::mul(self::add($v, $w), $mul)) . PHP_EOL;
-
-
         $a = self::add(self::byteSwap(self::add(self::mul(self::add($x, $z), $mul), $y)), $b);
         $b = self::mul(self::shiftMix(self::add(self::add(self::mul(self::add($z, $a), $mul), $d), $h)), $mul);
 
